@@ -1,0 +1,16 @@
+.navbarContainer{
+display: flex;
+background-color: lightcoral;
+padding:20px;
+}
+.logoContainer{
+    display:flex;
+    align-items: center;
+}
+
+.logoContainer span{
+ margin-left: 5px; 
+ color:white;
+ font-weight: 600;
+}
+

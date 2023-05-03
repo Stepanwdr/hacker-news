@@ -1,0 +1,15 @@
+.refreshBtn{
+    display: flex;
+    align-items: center;
+}
+.refreshBtn span{
+margin-left: 5px;
+}
+.top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.storyListContainer ol{
+padding: 0;
+}

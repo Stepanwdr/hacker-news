@@ -1,0 +1,29 @@
+.details {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.detail span {
+    margin-left: 5px;
+    color: var(--grey);
+    font-size: 12px;
+}
+.rotateBottom{
+    transition: all .2s ease;
+    transform: rotate(90deg);
+}
+.rotateRight{
+    transition: all .2s ease;
+    transform: rotate(0);
+}
+.panelStyle{
+    margin-bottom: 15px;
+    background-color: rgb(243, 240, 240);
+}

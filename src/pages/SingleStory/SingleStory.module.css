@@ -1,0 +1,19 @@
+.singleStoryCintainer{
+    display:flex;
+    flex-direction: column;
+    min-height:calc(100vh - 110px);
+    margin-top: 10px;
+}
+.singleStoryCintainer h5{
+margin-left: 5px !important;
+
+}
+.comentsDivider{
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+}
+
+.commentsHead {
+    display:flex;
+    align-items: center;
+}
