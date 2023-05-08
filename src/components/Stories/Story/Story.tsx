@@ -1,16 +1,15 @@
 import {FC} from "react"
-import { IStory } from "../../../models/IStory"
 import styles from './Story.module.css'
+import { IStory } from "../../../models/IStory"
 import {IoPersonOutline,IoBarChartOutline,IoChatbubbleEllipsesOutline,IoTimeOutline,IoLinkOutline} from 'react-icons/io5'
-import {Row,Typography,Space,Skeleton, Divider} from 'antd'
+import {Typography} from 'antd'
 import {grey} from '../../../consts/colors'
 import moment from 'moment'
- import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 interface StoryProps{
     story:IStory,
-    loading:boolean
 }
-const Story:FC<StoryProps>=({story,loading})=>{
+const Story:FC<StoryProps>=({story})=>{
   const {title,id,score,url,by,kids,time}=story
     return (
        <div className={styles.storyContainer}>

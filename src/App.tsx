@@ -5,13 +5,13 @@ import { Outlet } from 'react-router-dom';
 import AppLayout from './components/AppLayout/AppLayout';
 
 
-const App:FC=()=>{
-return (
-  <AppLayout>
-    <AppRoutes/>
-    <Outlet/>
-  </AppLayout>
-)
+const App: FC = () => {
+  return (
+    <AppLayout>
+      <AppRoutes />
+      <Outlet />
+    </AppLayout>
+  )
 }
 
 export default App;

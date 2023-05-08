@@ -11,6 +11,7 @@ export interface IComment{
     text:string,
     time : string,
     type: string,
-    childComments?:IComment[]
+    childComments?:IComment[],
+    deleted?:boolean
 }
 

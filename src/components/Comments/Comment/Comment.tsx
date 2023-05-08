@@ -1,79 +1,64 @@
-import { FC } from "react"
+import React, { FC,useState } from "react"
 import { IComment, commentId } from "../../../models/IComment"
 import { Collapse } from 'antd';
-import { IoPersonOutline, IoBarChartOutline, IoChatbubbleEllipsesOutline, IoTimeOutline, IoLinkOutline, IoChevronForwardCircleOutline } from 'react-icons/io5'
+import {IoChevronForwardCircleOutline } from 'react-icons/io5'
+import CommentDetails from "./CommentDetails/CommentDetails";
 import styles from './Comment.module.css'
-import { grey } from "../../../consts/colors"
-import moment from "moment"
-/*
-export interface IComment{
-    by:string,
-    id:number
-    kids:number[],
-    parent : number,
-    text:string,
-    time : string,
-    type: string
-}
-*/
+import useComments from "../../../hooks/useComments";
 interface CommentProps {
-  comment: IComment,
-  getComments:(id:commentId)=>void
+  comment: any,
+  getChild:(id:commentId,parentId:number)=>void,
+  key:number | string
 }
-const panelStyle = {
+
+const Comment: FC<CommentProps> = ({ comment,getChild,key }) => {
+  const { by, id, kids, text, time, childComments,parent,deleted} = comment
  
+  const [loading,setLoading]=useState({})
+const checkIsactiveTab=(isActive:boolean | undefined)=>kids?.length && <IoChevronForwardCircleOutline size={18} className={isActive ? styles.rotateBottom : styles.rotateRight} />
+const toggleCollapse=(e:string[] | string)=>{
 
-};
-const Comment: FC<CommentProps> = ({ comment,getComments }) => {
-  const { by, id, kids, parent, text, time, type,childComments } = comment
 
-const getChildComments=(e:string[] | string)=>{
-  console.log(e)
-  if(e?.length){
-    if(kids?.length){
-      getComments(kids[0])
+  if(kids?.length){
+    if(!childComments.length){
+      kids.forEach((childId:number)=>getChild(childId,id))
     }
-  
   }
-     
 }
-console.log(comment)
-  return <Collapse
-    onChange={(e) =>getChildComments(e)}
- className={styles.panelStyle}
+
+const closeCollapse=()=>{
+
+}
+
+  return <React.Fragment key={key}>
+    <Collapse
+    onChange={(e) =>toggleCollapse(e)}
+    className={styles.panelStyle}
     bordered={false}
     defaultActiveKey={[id]}
-    expandIcon={({ isActive }) => kids?.length && <IoChevronForwardCircleOutline size={18} className={isActive ? styles.rotateBottom : styles.rotateRight} />}
-    style={{ background: '--grey' }}
+    expandIcon={({ isActive }) => checkIsactiveTab(isActive)}
     collapsible={undefined}
   >
   <Collapse.Panel
   header={
-    <div>
-      <div>
-        <p dangerouslySetInnerHTML={{ __html: text }} />
-      </div>
-      <div className={styles.details}>
-        <p className={styles.detail}>
-          <IoPersonOutline color={grey} /> <span>{by}</span>
-        </p>
-        <p className={styles.detail}>
-          <IoTimeOutline color={grey} /> <span>{moment(time).format('MMMM Do YYYY, h:mm:ss a')} </span>
-        </p>
-        <p className={styles.detail}>
-          <IoChatbubbleEllipsesOutline color={grey} /> <span> {kids?.length ? kids?.length : 0}</span>
-        </p>
-      </div>
-    </div>
+  <CommentDetails comment={comment}/>
   }
-  key={''}
-  style={panelStyle}
+ key={''}
 >
 
-{childComments?.length ? <Comment comment={comment} getComments={getComments}/>:<>no comments</>}
 
+{childComments?.length
+ ? childComments
+ .map((comment:IComment)=><div className={styles.childComment}>
+  <Comment
+    key={comment.id}
+    comment={comment}
+    getChild={getChild}
+  /></div>) :''
+}
 </Collapse.Panel>
-
   </Collapse>
+  </React.Fragment>
+
 }
 export default Comment
